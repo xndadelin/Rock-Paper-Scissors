@@ -8,38 +8,55 @@ function getComputerChoice(){
         return 'scissors';
     }
 }
+let scoreComputer = 0;
+let scorePlayer = 0;
+
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     if(playerSelection == 'rock'){
         if(computerSelection ==  'rock'){
-            return 'Tie!'
+            return 'Tie!'; 
         }else if(computerSelection == 'paper'){
-            return 'You lose! Paper beats Rock!'
+            scoreComputer++;
+            return 'You lose! Paper beats Rock!';
         }else{
-            return 'You win! Rock beats scissors'
+            scorePlayer++;
+            return 'You win! Rock beats scissors';
         }
     }
     if(playerSelection == 'paper'){
         if(computerSelection == 'paper'){
             return 'Tie!'
         }else if(computerSelection == 'scissors'){
-            return 'You lose! Scissors beats paper!'
+            scoreComputer++;
+            return 'You lose! Scissors beats paper!';
         }else{
-            return 'You win! Paper beats Rock!'
+            scorePlayer++;
+            return 'You win! Paper beats Rock!';
         }
     }
     if(playerSelection == 'scissors'){
         if(computerSelection == 'scissors'){
             return 'Tie!'
         }else if(computerSelection == 'rock'){
-            return 'You lose! Rock beats scissors!'
+            scoreComputer++;
+            return 'You lose! Rock beats scissors!';
         }else{
-            return 'You win! Scissors beats paper!'
+            scorePlayer++;
+            return 'You win! Scissors beats paper!';
         }
     }
 }
-  const playerSelection = "rock";
-  const computerSelection = getComputerChoice();
-  console.log(computerSelection);
-  console.log(playRound(playerSelection, computerSelection));
+function game(){
+    let computer= getComputerChoice();
+    let player= prompt();
+    let str = playRound(computer, player);
+    console.log(str);
+}
+for(let i = 1; i<=5;++i){
+    game();
+}
+console.log(scoreComputer);
+console.log(scorePlayer);
+scoreComputer > scorePlayer ? console.log('Computer is the winner!') : console.log('Player is the winner!')
