@@ -91,6 +91,10 @@ buttons.forEach((button) => {
         content.style.cssText = 'font-family: monospace, fantasy, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif; font-size: 30px; margin-top: 30px;'
         let computer = getComputerChoice();    
         content.textContent = game(computer, button.className);
+        button.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          button.style.transform = 'scale(1)';
+        }, 100);
         dataC.textContent = scoreComputer;
         dataP.textContent = scorePlayer;
         if (scoreComputer === 5 || scorePlayer === 5) {
@@ -105,4 +109,5 @@ buttons.forEach((button) => {
             });
         }
     });
+    
 });
