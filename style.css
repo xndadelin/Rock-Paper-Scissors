@@ -33,6 +33,3 @@ body{
     flex-direction: row;
     gap: 400px;
 }
-.rock{
-    background-image: url('rock.png');
-}
