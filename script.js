@@ -11,7 +11,7 @@ function getComputerChoice(){
 let scoreComputer = 0;
 let scorePlayer = 0;
 
-function playRound(playerSelection, computerSelection) {
+function playRound(computerSelection, playerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     if(playerSelection == 'rock'){
@@ -22,7 +22,7 @@ function playRound(playerSelection, computerSelection) {
             return 'You lose! Paper beats Rock!';
         }else{
             scorePlayer++;
-            return 'You win! Rock beats scissors';
+            return 'You win! Rock beats scissors!';
         }
     }
     if(playerSelection == 'paper'){
@@ -48,15 +48,61 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 }
-function game(){
-    let computer= getComputerChoice();
-    let player= prompt();
+function game(computer, player){
     let str = playRound(computer, player);
-    console.log(str);
+    return `Computer choose ${computer} and you choose ${player}. ${str}` ;
 }
-for(let i = 1; i<=5;++i){
-    game();
-}
-console.log(scoreComputer);
-console.log(scorePlayer);
-scoreComputer > scorePlayer ? console.log('Computer is the winner!') : console.log('Player is the winner!')
+const content = document.createElement('div');
+const header = document.querySelector('.header');
+header.appendChild(content);
+let max;
+
+const buttons = document.querySelectorAll('button');
+
+const table = document.createElement('table');
+table.style.cssText = 'border: 1px solid black;'
+header.appendChild(table);
+
+const tableRow = document.createElement('tr');
+table.appendChild(tableRow);
+
+const rowComputer = document.createElement('th');
+const rowPlayer = document.createElement('th');
+tableRow.appendChild(rowComputer);
+tableRow.appendChild(rowPlayer);
+
+const data = document.createElement('tr');
+table.appendChild(data);
+
+const dataC = document.createElement('td');
+const dataP = document.createElement('td');
+
+data.appendChild(dataC);
+data.appendChild(dataP);
+rowComputer.textContent = 'Computer';
+rowPlayer.textContent = 'Player';
+dataC.style.cssText = 'border: 1px solid black;'
+dataP.style.cssText = 'border: 1px solid black';
+rowPlayer.style.cssText = 'border: 1px solid black; font-family: monospace, fantasy, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;';
+rowComputer.style.cssText = 'border: 1px solid black; font-family: monospace, fantasy, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;';
+table.style.cssText = 'margin-top: 30px;'
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        content.style.cssText = 'font-family: monospace, fantasy, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif; font-size: 30px; margin-top: 30px;'
+        let computer = getComputerChoice();    
+        content.textContent = game(computer, button.className);
+        dataC.textContent = scoreComputer;
+        dataP.textContent = scorePlayer;
+        if (scoreComputer === 5 || scorePlayer === 5) {
+            if (scoreComputer > scorePlayer) {
+                max = 'computer';
+            } else {
+                max = 'you';
+            }
+            content.textContent = `Game over! The winner is ${max}`;
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
+        }
+    });
+});
